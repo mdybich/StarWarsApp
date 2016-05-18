@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <title>Star Wars</title>
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.504/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.504/styles/kendo.black.min.css" />
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/star-wars-styles.css" />
+    </head>
+    <body ng-controller="StarWarsController as vm">
+        <section class="col-md-12">
+            <img class="img-responsive center-block" src="images/title-image.gif" />
+        </section>
+        <main id="main-container">
+            <section class="col-md-8" style="margin-top: 40px">
+                <div kendo-grid k-options="vm.gridOptions"></div>
+            </section>
+            <section class="col-md-4" style="margin-top: 40px">
+                <form style="form"> 
+                    <div class="form-group">
+                        <label style="color: white">Nazwa:</label>
+                        <input type="text" class="k-textbox" ng-model="vm.characterToAdd.name"/>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white">Rodzaj:</label>
+                        <select kendo-drop-down-list k-options="vm.dropDownTypeOptions" ng-model="vm.characterToAdd.type"
+                            ng-change="vm.onTypeChange()"></select>
+                    </div>
+                    <div class="form-group" ng-show="vm.characterToAdd.type == 1">
+                        <label style="color: white">Ranga jedi:</label>
+                        <select kendo-drop-down-list k-options="vm.dropDownJediRangeOptions" ng-model="vm.characterToAdd.jediRange"></select>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white">Data urodzin:</label>
+                        <input kendo-date-picker k-options="vm.datePickerOptions" ng-model="vm.characterToAdd.dateOfBirth" />
+                    </div>
+                    <button type="button" class="k-button" ng-disabled="vm.isAddButtonDisabled()" ng-click="vm.onAddButtonClicked()">Dodaj</button>
+                </form>
+               
+            </section>
+            
+        </main>
+                    
+        <!-- Scripts section -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2016.2.504/js/kendo.all.min.js"></script>
+        <script src="scripts/app.module.js"></script>
+        <script src="scripts/StarWarsController.js"></script>
+        <script src="scripts/data.service.js"></script>
+        <script src="scripts/widget.options.service.js"></script>
+    </body>
+</html>

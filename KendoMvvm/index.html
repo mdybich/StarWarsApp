@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Star Wars</title>
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.504/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.504/styles/kendo.black.min.css" />
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="styles/star-wars-styles.css" />
+    </head>
+    <body>
+        <section class="col-md-12">
+            <img class="img-responsive center-block" src="images/title-image.gif" />
+        </section>
+        <main id="main-container">
+            <section class="col-md-8" style="margin-top: 40px">
+                <div data-role="grid" 
+                     data-columns="[{field : 'name', title: 'Nazwa'},
+                                    {field: 'type', title: 'Rodzaj', template: '#=type.name#'},
+                                    {field: 'jediRange', title: 'Ranga jedi', template: '#=jediRange.name#'},
+                                    {field: 'dateOfBirth', title:'Data urodzin'},
+                                    { command: { text: 'Usuń', click: onDeleteButtonClicked }, title: '', width: '95px' }]"               
+                     data-bind="source: charactersList" >
+                </div>
+            </section>
+            <section class="col-md-4" style="margin-top: 40px">
+                <form style="form"> 
+                    <div class="form-group">
+                        <label style="color: white">Nazwa:</label>
+                        <input type="text" class="k-textbox" data-bind="value: selectedValue.name" />
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white">Rodzaj:</label>
+                        <input data-role="dropdownlist"
+                               data-value-primitive="true"
+                               data-text-field="name"
+                               data-value-field="id"
+                               data-bind="source: typesList, value: selectedValue.type, events:{change: onTypeChanged}" />
+                    </div>
+                    <div class="form-group" data-bind="visible: isJediRangeOptionVisible">
+                        <label style="color: white">Ranga jedi:</label>
+                        <input data-role="dropdownlist"
+                               data-value-primitive="true"
+                               data-text-field="name"
+                               data-value-field="id"
+                               data-bind="source: jediRangesList, value: selectedValue.jediRange" />
+                    </div>
+                    <div class="form-group">
+                        <label style="color: white">Data urodzin:</label>
+                        <input data-role="datepicker"
+                               data-format="dd.MM.yyyy"
+                               data-bind="value: selectedValue.dateOfBirth" />
+                    </div>
+                    <button type="button" class="k-button" data-bind="events: {click: onAddButtonClicked}">Dodaj</button>
+                </form>               
+            </section>            
+        </main>
+                    
+        <!-- Scripts section -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2016.2.504/js/kendo.all.min.js"></script>
+        
+        <script src="scripts/data-module.js"></script>
+        <script src="scripts/star-wars-app.js"></script>
+    </body>
+</html>
